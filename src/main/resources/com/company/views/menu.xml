@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://jmix.io/schema/flowui/menu">
+
+    <menu id="application" title="msg://com.company.views/menu.application.title" opened="true">
+        <item view="User.list" title="msg://com.company.views.view.user/UserListView.title"/>
+        <item view="CartView" title="msg://com.company.views.view.cart/cartView.title"/>
+    </menu>
+
+</menu-config>

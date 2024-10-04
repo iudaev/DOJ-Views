@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://cartView.title">
+    <data>
+        <collection id="productsDc" class="com.company.views.entity.Product">
+            <loader id="productsDl">
+                <query>
+                    <![CDATA[select e from Product e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <layout>
+        <vbox width="100%">
+            <nativeLabel id="cartTotalLabel" text="Cart Total: $0.00"/>
+            <dataGrid id="productsDataGrid"
+                      dataContainer="productsDc"
+                      width="100%">
+                <columns>
+                    <column property="name"/>
+                    <column property="price"/>
+                    <column property="amount"/>
+                </columns>
+            </dataGrid>
+        </vbox>
+    </layout>
+</view>
