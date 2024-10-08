@@ -1,11 +1,14 @@
 .jmix
 !.jmix/hsqldb
 
+.jmix
+
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**
 !**/src/test/**
+!.jmix/hsqldb
 
 # Remove this line if you want to follow recommendations in src/main/bundles/README.md
 src/main/bundles/

@@ -4,6 +4,7 @@ package com.company.views.view.cart;
 import com.company.views.entity.Product;
 import com.company.views.view.main.MainView;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.router.BeforeLeaveEvent;
 import com.vaadin.flow.router.Route;
 import io.jmix.flowui.Dialogs;
 import io.jmix.flowui.UiComponents;
@@ -12,6 +13,8 @@ import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.kit.component.button.JmixButton;
 import io.jmix.flowui.model.CollectionContainer;
 import io.jmix.flowui.model.DataContext;
+import io.jmix.flowui.util.OperationResult;
+import io.jmix.flowui.util.UnknownOperationResult;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -66,19 +69,24 @@ public class CartView extends StandardView {
     public void onBeforeClose(BeforeCloseEvent event) {
 //        dataContext.save();
 
-        if (dataContext.hasChanges() && event.closedWith(StandardOutcome.CLOSE)) {
+        if (dataContext.hasChanges()) {
+            CloseAction action = event.getCloseAction();
+            if (action instanceof NavigateCloseAction navigateCloseAction) {
+                BeforeLeaveEvent beforeLeaveEvent = navigateCloseAction.getBeforeLeaveEvent();
+                beforeLeaveEvent.postpone();
 
-            dialogs.createOptionDialog()
-                    .withText("Save cart for later?")
-                    .withActions(
-                            new DialogAction(DialogAction.Type.YES)
-                                    .withHandler(e -> {
-                                        dataContext.save();
-                                        close(StandardOutcome.SAVE);
-                                    }),
-                            new DialogAction(DialogAction.Type.NO)
-                                    .withHandler(e -> close(StandardOutcome.DISCARD))
-                    ).open();
+                dialogs.createOptionDialog()
+                        .withText("Save cart for later?")
+                        .withActions(
+                                new DialogAction(DialogAction.Type.YES)
+                                        .withHandler(e -> {
+                                            dataContext.save();
+                                            close(StandardOutcome.SAVE);
+                                        }),
+                                new DialogAction(DialogAction.Type.NO)
+                                        .withHandler(e -> close(StandardOutcome.DISCARD))
+                        ).open();
+            }
         }
     }
 }
