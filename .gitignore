@@ -1,3 +1,5 @@
+.jmix
+!.jmix/hsqldb
 
 .gradle
 build/

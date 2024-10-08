@@ -16,7 +16,7 @@
     </facets>
     <layout>
         <vbox width="100%">
-            <nativeLabel id="cartTotalLabel" text="Cart Total: $0.00"/>
+            <span id="cartTotalSpan" text="Cart Total: $0.00"/>
             <dataGrid id="productsDataGrid"
                       dataContainer="productsDc"
                       width="100%">
